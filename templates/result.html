@@ -1,0 +1,71 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Review Sentiment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename = 'css/style.css')}}">
+</head>
+<body class="bg-img full_height" oncontextmenu="return false" style="">
+    <div class="navbar" onkeydown="return false;" onmousedown="return false;" style="background: #007580;">
+        <h2 class="text-white" style="margin-left: 20px;">
+            Movie Review Sentiment Analyzer
+        </h2>
+        <h4 class="text-white" style="margin-right: 30px;">
+            Welcome
+        </h4>
+    </div>
+    <div class="container">
+        <div class="row mt-60">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="card" style="border-radius: 20px 20px 20px 20px;">
+                    <div class="card-body" style="background-color: #c2d8d8; border-radius: 20px 20px 20px 20px;">
+                        <form method="post" action="/search">
+                            <input class="form-control" onkeydown="return true;" type="text" name="movie" placeholder="Enter Movie Name">
+                            <input class="btn btn-primary my_btn" style="border-radius: 20px 20px 20px 20px;" type="submit" value="Search">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+        <div class="row mt-60">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                {% if length != [] %}
+                    <table class="table table-bordered table-primary" style="text-align: center;">
+                        <tr>
+                            <th>IMDB ID</th>
+                            <th>Movie Name</th>
+                            <th>Year</th>
+                        </tr>
+                        {% for i in length %}
+                        <tr>
+                            <form action="/predict" method="post">
+                                <td>
+                                    <button class="btn" name="movie_id" type="submit" value="{{ imdb_ids[i] }}">{{ imdb_ids[i] }}</button>
+                                </td>
+                                <td>
+                                    <button class="btn" name="movie_id" type="submit" value="{{ imdb_ids[i] }}">{{ movie_names[i] }}</button>
+                                </td>
+                                <td>{{ yrs[i] }}</td>
+                            </form>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <h4 class="text-dark" style="text-align: center;">Movie not found or wrong movie name entered !!</h4>
+                {% endif %}
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    <div>
+        <h5 class="text-white" style="text-align: center;">© 2020 Copyright: Wasif Ekbal</h5>
+    </div>
+</body>
+</html>

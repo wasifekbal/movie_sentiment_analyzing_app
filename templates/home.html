@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Review Sentiment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename = 'css/style.css')}}">
+    <script>
+        $(document).keydown(function(e){
+            if(e.which === 123){
+               return false;
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        var currentHtmlContent;
+        var element = new Image();
+        var elementWithHiddenContent = document.querySelector("hide");
+        var innerHtml = elementWithHiddenContent.innerHTML;
+        element.__defineGetter__("id", function() {
+            currentHtmlContent= "";
+        });
+        setInterval(function() {
+            currentHtmlContent= innerHtml;
+            console.log(element);
+            console.clear();
+            elementWithHiddenContent.innerHTML = currentHtmlContent;
+        }, 1000);
+    </script>
+    <script type="text/javascript">
+        document.onkeydown = function (e) {
+            if(e.which == 123 || e.keyCode == 123)
+            { return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'Q'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'M'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.keyCode == 'I'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.keyCode == 'C'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.keyCode == 'Q'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.keyCode == 'M'.charCodeAt(0))
+            { return false; }
+        };
+    </script>
+</head>
+<body class="bg-img full_height" oncontextmenu="return false" id="main-div">
+    <div class="navbar" onkeydown="return false;" onmousedown="return false;" style="background: #007580;">
+        <h2 class="text-white" style="margin-left: 20px;">
+            Movie Review Sentiment Analyzer
+        </h2>
+        <h4 class="text-white" style="margin-right: 30px;">
+            Welcome
+        </h4>
+    </div>
+    <div class="container" style="">
+        <div class="row mt-60">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="card" style="border-radius: 20px 20px 20px 20px;">
+                    <div class="card-body" style="background-color: #c2d8d8; border-radius: 20px 20px 20px 20px;">
+                        <form method="post" action="/search">
+                            <input class="form-control" onkeydown="return true;" type="text" name="movie" placeholder="Enter Movie Name">
+                            <input class="btn btn-primary my_btn" style="border-radius: 20px 20px 20px 20px;" type="submit" value="Search">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <! ––  <div class="row" style="height: 318px;"></div>
+    </div>
+    <footer class="font-small footer" style="width: 100%;">
+        <div class="text-center py-3 text-white">© 2020 Copyright: Wasif Ekbal</div>
+    </footer>
+</body>
+</html>

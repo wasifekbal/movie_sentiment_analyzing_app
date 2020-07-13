@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Review Sentiment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename = 'css/style.css')}}">
+    <script>
+        $(document).keydown(function(e){
+            if(e.which === 123){
+               return false;
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        var currentHtmlContent;
+        var element = new Image();
+        var elementWithHiddenContent = document.querySelector("hide");
+        var innerHtml = elementWithHiddenContent.innerHTML;
+        element.__defineGetter__("id", function() {
+            currentHtmlContent= "";
+        });
+        setInterval(function() {
+            currentHtmlContent= innerHtml;
+            console.log(element);
+            console.clear();
+            elementWithHiddenContent.innerHTML = currentHtmlContent;
+        }, 1000);
+    </script>
+    <script type="text/javascript">
+        document.onkeydown = function (e) {
+            if(e.which == 123 || e.keyCode == 123)
+            { return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'Q'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'M'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.keyCode == 'I'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.keyCode == 'C'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.keyCode == 'Q'.charCodeAt(0))
+            { return false; }
+            if(e.ctrlKey && e.keyCode == 'M'.charCodeAt(0))
+            { return false; }
+        };
+    </script>
+</head>
+<body class="bg-img" oncontextmenu="return false" id="hide" style="">
+    <div class="navbar" onkeydown="return false;" onmousedown="return false;" style="background: #007580;">
+        <h2 class="text-white" style="margin-left: 20px;">
+            Movie Review Sentiment Analyzer
+        </h2>
+        <h4 class="text-white" style="margin-right: 30px;">
+            Welcome
+        </h4>
+    </div>
+    <div class="container-lg">
+        <div class="row mt-40">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="card" style="border-radius: 20px 20px 20px 20px;">
+                    <div class="card-body" style="background-color: #c2d8d8; border-radius: 20px 20px 20px 20px;">
+                        <form method="post" action="/search">
+                            <input class="form-control" onkeydown="return true;" type="text" name="movie" placeholder="Enter Movie Name">
+                            <input class="btn btn-primary my_btn" style="border-radius: 20px 20px 20px 20px;" type="submit" value="Search">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+        <div class="row mt-40">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{{ movie_info[5] }}" height="500" width="350">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card" style="text-align: center; border-radius: 20px 20px 20px 20px; background: #E8E9EB; height: 100px; margin-top: 10px;">
+                    <h2 class="card-title text-dark" style="margin-top: 10px;"> {{ movie_info[1] }}</h2>
+                    <h6 class="card-text text-mute">
+                        {{movie_info[2]}}&emsp;|&emsp;{{movie_info[3]}}&emsp;|&emsp;{{movie_info[4]}}
+                    </h6>
+                </div>
+                <div class="mt-20">
+                    <div class="card" style="text-align: center; border-radius: 20px 20px 20px 20px; background: #E8E9EB; float: left; width: 45%; margin: 0% 2% 0% 4%; height: 100px;">
+                        <div class="card-body" style="padding: 10px 0px 0px 0px;">
+                            <img src="{{ url_for('static',filename = 'pic/rating_star.png')}}" width="50" height="50">
+                            <h5 class="text-dark"> {{movie_info[0]}} / 10.0</h5>
+                        </div>
+                    </div>
+                    <div class="card" style="text-align: center; border-radius: 20px 20px 20px 20px; background: #E8E9EB;width: 45%; height: 100px;">
+                        <div class="card-body" style="padding: 10px 0px 0px 0px;">
+                            {% if flag == 0 %}
+                                {% if perc <= 5.5 %}
+                                <img src="{{ url_for('static',filename = 'pic/red_sad.png')}}" width="60" height="50">
+                                <h5 class="text-dark"> Sentiment Rating : {{perc}} </h5>
+                                {% else %}
+                                <img src="{{ url_for('static',filename = 'pic/green_smile.png')}}" width="60" height="50">
+                                <h5 class="text-dark"> Sentiment Rating : {{perc}} </h5>
+                                {% endif %}
+                            {% else %}
+                                <img src="{{ url_for('static',filename = 'pic/red_sad.png')}}" width="60" height="50">
+                                <h5 class="text-dark"> Sentiment Rating : Not generated </h5>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-20">
+                    <article style="background: #E8E9EB; padding: 10px 10px 10px 10px; border-radius: 20px 20px 20px 20px;">
+                        <h3>Storyline :- </h3>
+                        <p style="margin-top: 10px;"> {{ movie_info[6] }} </p>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="margin: 30px 0px 10px 0px; border-radius: 20px 20px 20px 20px; border:5px solid #39CCCC;">
+                <h2 class="text-white" style="text-align: center; border-radius: 20px 20px 20px 20px; margin-top: 10px; border:2px solid white;"><<--  Reviews  -->></h2>
+                <div class="container">
+                    {% if flag == 0 %}
+                        {% for i in length %}
+                        <div style="background: #E8E9EB; text-align: center; border: 4px double rgba(113,164,156,0.5); border-radius: 30px 30px 30px 30px; margin: 0px 0px 10px 0px;">
+                            <img src="{{ url_for('static',filename = 'pic/rating_star.png')}}" width="20" height="20">
+                            {% if review_df['rating'][i]!="nan" %}
+                            <h6>{{ review_df['rating'][i] }} / 10</h6>
+                            {% else %}
+                            <h6>Rating not found.</h6>
+                            {% endif %}
+                            <h5>Reviewed by - {{review_df['username'][i]}}</h5>
+                            {% if review_df['prediction'][i]==1 %}
+                            <p class="text-success" style="text-align: center; padding: 0px 10px 0px 10px;">{{review_df['review_text'][i]}}</p>
+                            {% else %}
+                            <p class="text-danger" style="text-align: center; padding: 0px 10px 0px 10px;">{{review_df['review_text'][i]}}</p>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                    <div style="text-align: center; border: 4px double rgba(113,164,156,0.5); border-radius: 30px 30px 30px 30px; margin: 0px 0px 10px 0px;">
+                       <h4>Reviews of the movie is too less to judge it's sentiment.</h4>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h5 class="text-white" style="text-align: center;">© 2020 Copyright: Wasif Ekbal</h5>
+    </div>
+</body>
+</html>
