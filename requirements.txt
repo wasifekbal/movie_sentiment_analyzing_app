@@ -9,7 +9,7 @@ html5lib==1.0.1
 idna==2.9
 itsdangerous==1.1.0
 Jinja2==2.11.3
-joblib==0.15.1
+joblib==1.2.0
 MarkupSafe==1.1.1
 nltk==3.6.6
 numpy==1.22.0
